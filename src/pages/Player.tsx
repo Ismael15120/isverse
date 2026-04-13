@@ -2,6 +2,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { VideoPlayer } from '../components/player/VideoPlayer';
 import { useVideoSource } from '../hooks/useVideoSource';
+import { tmdbAPI } from '../lib/api';
 import { useStore } from '../store/useStore';
 import { ChevronLeft, ChevronRight, Tv, Film, Home } from 'lucide-react';
 
