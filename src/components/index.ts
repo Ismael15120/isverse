@@ -4,6 +4,7 @@ export * from './ui/FluidCarousel';
 export * from './ui/OnboardingModal';
 export * from './ui/MediaCard';
 export * from './ui/MediaSection';
+export * from './ui/SplashScreen';
 export * from './layout/BottomNav';
 export * from './layout/Header';
 export * from './layout/PageWrapper';

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet, useLocation, Navigate } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState, useCallback } from 'react';
 import { BottomNav } from './components/layout/BottomNav';
+import { SplashScreen } from './components/ui/SplashScreen';
 import { Loader } from 'lucide-react';
 
 // Lazy loading pour améliorer le temps de démarrage initial
@@ -53,5 +54,14 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  // Affiche le splash screen uniquement au premier chargement
+  const [splashDone, setSplashDone] = useState(false);
+  const handleSplashDone = useCallback(() => setSplashDone(true), []);
+
+  return (
+    <>
+      {!splashDone && <SplashScreen onDone={handleSplashDone} />}
+      <RouterProvider router={router} />
+    </>
+  );
 }
