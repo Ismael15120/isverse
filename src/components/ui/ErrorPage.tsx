@@ -7,7 +7,18 @@ export function ErrorPage() {
   const error = useRouteError() as any;
   const navigate = useNavigate();
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
+    // Nettoyage agressif des Service Workers
+    if ('serviceWorker' in navigator) {
+      try {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const registration of registrations) {
+          await registration.unregister();
+        }
+      } catch (e) {
+        console.error('Erreur unregister SW:', e);
+      }
+    }
     // Force un rechargement complet en ignorant le cache
     window.location.reload();
   };

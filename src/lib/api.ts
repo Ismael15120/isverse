@@ -34,10 +34,17 @@ async function fetchTMDB<T = any>(
   if (!key) throw new Error('Aucune clé API configurée');
 
   const url = new URL(`${TMDB_BASE}${path}`);
-  url.searchParams.set('language', 'fr-FR');
+  
+  // Paramètres par défaut
   for (const [k, v] of Object.entries(params)) {
     url.searchParams.set(k, v);
   }
+
+  // Force la langue fr-FR (écrase tout paramètre 'language' passé dans params)
+  url.searchParams.set('language', 'fr-FR');
+  
+  // Cache-busting agressif : ajoute un timestamp pour vider le cache navigateur/CDN
+  url.searchParams.set('v', Date.now().toString());
 
   const headers: Record<string, string> = {};
   if (isBearer(key)) {
