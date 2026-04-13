@@ -9,7 +9,11 @@ export const TMDB_IMG_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
 // Lecture / écriture de la clé (Variable d'env. en priorité puis localStorage)
 export function getTmdbApiKey(): string | null {
-  return import.meta.env.VITE_TMDB_API_KEY || localStorage.getItem('tmdb_api_key');
+  const envKey = import.meta.env.VITE_TMDB_API_KEY;
+  const localKey = localStorage.getItem('tmdb_api_key');
+  
+  if (envKey && envKey !== 'ta_cle_ici') return envKey;
+  return localKey;
 }
 
 export function setTmdbApiKey(key: string): void {

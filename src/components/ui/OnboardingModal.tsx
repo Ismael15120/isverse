@@ -92,6 +92,17 @@ export function OnboardingModal() {
             <NeonButton onClick={handleSave} disabled={!key.trim()} variant="primary" size="md" className="w-full">
               Continuer →
             </NeonButton>
+            
+            <button
+              onClick={() => {
+                // Hard reload pour vider les caches éventuels
+                window.location.href = window.location.href;
+                window.location.reload();
+              }}
+              className="w-full py-3 rounded-xl border border-white/10 text-white/40 text-[12px] hover:text-white/60 transition-colors"
+            >
+              Déjà configuré sur Vercel ? Recharger l'app
+            </button>
           </div>
         </GlassCard>
       </div>

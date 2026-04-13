@@ -18,8 +18,7 @@ export function useTMDB<T = any>(
   const fetcherRef = useRef(fetcher);
   fetcherRef.current = fetcher; // toujours à jour sans re-render
 
-  // hasKey = true si clé dispo dans localStorage OU variable d'env Vercel
-  const hasKey = !!(import.meta.env.VITE_TMDB_API_KEY || getTmdbApiKey());
+  const hasKey = !!getTmdbApiKey();
 
   const run = (signal?: AbortSignal) => {
     if (!getTmdbApiKey()) {

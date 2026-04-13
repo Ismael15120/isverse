@@ -9,7 +9,10 @@ import './styles/globals.css'
 // → Plus jamais de modal "Entrez votre clé" sur un nouvel appareil.
 const envKey = import.meta.env.VITE_TMDB_API_KEY;
 if (envKey && envKey !== 'ta_cle_ici') {
+  console.log('[ISVERSE] Clé API détectée via Vercel ✅');
   localStorage.setItem('tmdb_api_key', envKey);
+} else {
+  console.warn('[ISVERSE] Aucune clé API détectée dans les variables d\'environnement.');
 }
 // ─────────────────────────────────────────────────────────────────
 
