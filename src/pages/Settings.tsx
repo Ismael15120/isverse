@@ -151,8 +151,6 @@ export function SettingsPage() {
         </div>
       </GlassCard>
 
-      </GlassCard>
-
       {/* Données locales */}
       <GlassCard className="p-5 space-y-3">
         <div className="flex items-center gap-2 text-rose-400">
