@@ -7,16 +7,6 @@ const TMDB_BASE = 'https://api.themoviedb.org/3';
 export const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 export const TMDB_IMG_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
-// Récupère la langue préférée de l'utilisateur (défaut: fr-FR)
-export function getUserLanguage(): string {
-  return localStorage.getItem('streamflow_language') || 'fr-FR';
-}
-
-// Définit la langue préférée
-export function setUserLanguage(lang: string): void {
-  localStorage.setItem('streamflow_language', lang);
-}
-
 // Lecture / écriture de la clé (Variable d'env. en priorité puis localStorage)
 export function getTmdbApiKey(): string | null {
   const envKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -44,7 +34,7 @@ async function fetchTMDB<T = any>(
   if (!key) throw new Error('Aucune clé API configurée');
 
   const url = new URL(`${TMDB_BASE}${path}`);
-  url.searchParams.set('language', getUserLanguage());
+  url.searchParams.set('language', 'fr-FR');
   for (const [k, v] of Object.entries(params)) {
     url.searchParams.set(k, v);
   }

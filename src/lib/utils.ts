@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { getUserLanguage } from './api';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,7 +18,7 @@ export function delay(ms: number): Promise<void> {
 // Formatage de date selon la langue utilisateur
 export function formatDate(dateString: string): string {
   if (!dateString) return 'N/A';
-  const lang = getUserLanguage().replace('-', '_'); // fr-FR → fr_FR
+  const lang = 'fr-FR';
   try {
     return new Date(dateString).toLocaleDateString(lang, {
       year: 'numeric',
@@ -39,7 +38,7 @@ export function formatRelativeDate(dateString: string): string {
   const diffMs = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
   
-  const lang = getUserLanguage();
+  const lang = 'fr-FR';
   
   if (diffDays === 0) return lang === 'fr-FR' ? "Aujourd'hui" : 'Today';
   if (diffDays === 1) return lang === 'fr-FR' ? 'Hier' : 'Yesterday';

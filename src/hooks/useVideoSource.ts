@@ -20,27 +20,25 @@ function buildSources(
   // Sources classées : VF/VOSTFR en priorité, puis sources génériques
   if (isMovie) {
     return [
-      // Sources avec sélection de langue possible (VF souvent disponible)
+      { name: 'Videasy (VF)', url: `https://player.videasy.net/movie/${tmdbId}?language=fr` },
       { name: 'VidSrc Pro',   url: `https://vidsrc.pro/embed/movie/${tmdbId}?lang=fr` },
-      { name: 'VidSrc.to',    url: `https://vidsrc.to/embed/movie/${tmdbId}` },
+      { name: 'VidSrc.to',    url: `https://vidsrc.to/embed/movie/${tmdbId}?lang=fr` },
+      { name: '2Embed',       url: `https://www.2embed.cc/embed/${tmdbId}?lang=fr` },
       { name: 'Embed.su',     url: `https://embed.su/embed/movie/${tmdbId}` },
       { name: 'MovieBox',     url: `https://moviesapi.club/movie/${tmdbId}` },
       { name: 'SuperEmbed',   url: `https://multiembed.mov/directstream.php?video_id=${tmdbId}&tmdb=1` },
-      { name: '2Embed',       url: `https://www.2embed.cc/embed/${tmdbId}` },
       { name: 'AutoEmbed',    url: `https://autoembed.co/movie/tmdb/${tmdbId}` },
-      { name: 'SmashyStream', url: `https://player.smashy.stream/movie/${tmdbId}` },
     ];
   } else {
     return [
-      // TV sources avec saison/épisode
-      { name: 'VidSrc Pro',   url: `https://vidsrc.pro/embed/tv/${tmdbId}/${season}/${episode}` },
-      { name: 'VidSrc.to',    url: `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}` },
+      { name: 'Videasy (VF)', url: `https://player.videasy.net/tv/${tmdbId}/${season}/${episode}?language=fr` },
+      { name: 'VidSrc Pro',   url: `https://vidsrc.pro/embed/tv/${tmdbId}/${season}/${episode}?lang=fr` },
+      { name: 'VidSrc.to',    url: `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}?lang=fr` },
+      { name: '2Embed',       url: `https://www.2embed.cc/embedtv/${tmdbId}&s=${season}&e=${episode}&lang=fr` },
       { name: 'Embed.su',     url: `https://embed.su/embed/tv/${tmdbId}/${season}/${episode}` },
       { name: 'MovieBox',     url: `https://moviesapi.club/tv/${tmdbId}-${season}-${episode}` },
       { name: 'SuperEmbed',   url: `https://multiembed.mov/directstream.php?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}` },
-      { name: '2Embed',       url: `https://www.2embed.cc/embedtv/${tmdbId}&s=${season}&e=${episode}` },
       { name: 'AutoEmbed',    url: `https://autoembed.co/tv/tmdb/${tmdbId}-${season}-${episode}` },
-      { name: 'SmashyStream', url: `https://player.smashy.stream/tv/${tmdbId}?s=${season}&e=${episode}` },
     ];
   }
 }
