@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — Thème Premium Cinématique
+   Inspiré : Apple TV+, iOS 17, visionOS
+═══════════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --bg-base:     #08080f;
+  --bg-surface:  #0e0e1c;
+  --bg-elevated: #141428;
+
+  /* Glass layers — du plus léger au plus dense */
+  --glass-1:      rgba(255, 255, 255, 0.04);
+  --glass-2:      rgba(255, 255, 255, 0.07);
+  --glass-3:      rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-border-strong: rgba(255, 255, 255, 0.20);
+
+  /* Palette accent — violet riche + bleu pur */
+  --accent:       #7c3aed;
+  --accent-light: #a78bfa;
+  --accent-mid:   #9d5ffc;
+  --accent-dim:   rgba(124, 58, 237, 0.20);
+  --accent-blue:  #3b82f6;
+  --accent-rose:  #f43f5e;
+  --accent-gold:  #f59e0b;
+
+  /* Text hiérarchie */
+  --text-primary:   rgba(255, 255, 255, 0.93);
+  --text-secondary: rgba(255, 255, 255, 0.50);
+  --text-tertiary:  rgba(255, 255, 255, 0.28);
+
+  /* Shadows */
+  --shadow-sm:   0 2px 12px rgba(0, 0, 0, 0.40);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(255, 255, 255, 0.07) inset;
+  --shadow-xl:   0 12px 48px rgba(0, 0, 0, 0.70), 0 1px 0 rgba(255, 255, 255, 0.09) inset;
+
+  /* Radius système */
+  --radius-sm:  12px;
+  --radius-md:  18px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+}
+
+/* ═══ Reset ═══ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-base);
+  /* Halo ambiant violet subtil en haut, bleu en bas */
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(124, 58, 237, 0.14) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 85% 95%,  rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════════════════
+   GLASS SYSTEM — Apple frosted glass
+═══════════════════════════════════════════════ */
+.glass {
+  background: var(--glass-2);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* Carte principale — fond ultra léger, bordure fine */
+.glass-card {
+  background: var(--glass-1);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.22s ease,
+              background 0.22s ease;
+}
+
+.glass-card:hover {
+  background: var(--glass-2);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+.glass-card:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHIE
+═══════════════════════════════════════════════ */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.72) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.accent-text {
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.03); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Squelette de chargement élégant (shimmer) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--glass-1) 25%,
+    var(--glass-3) 50%,
+    var(--glass-1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ═══════════════════════════════════════════════
+   UTILITAIRES
+═══════════════════════════════════════════════ */
+/* Barre de défilement invisible */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Safe areas iOS */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-top    { padding-top:    env(safe-area-inset-top);    }
+}
+
+/* Divider subtil */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+}
+
+/* Pill badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ═══ Legacy compat (conservés pour ne pas tout casser) ═══ */
+.neon-text      { color: var(--text-primary); }
+.neon-glow      { box-shadow: 0 0 20px var(--accent-dim); }
+.glass-border   { border-color: var(--glass-border); }
+.text-primary   { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+
+/* Safe area compat */
+.safe-bottom-pb { padding-bottom: max(env(safe-area-inset-bottom), 8px); }
