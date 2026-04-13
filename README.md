@@ -32,6 +32,26 @@ npm run dev
 
 > **Obtenir une clé TMDB** : Créé un compte sur [themoviedb.org](https://www.themoviedb.org) → Paramètres → API → Créer une clé v3.
 
+## 🌍 Internationalisation
+
+L'application supporte le multilingue. Par défaut : **Français (fr-FR)**.
+
+**Changer la langue :**
+1. Va dans `/settings`
+2. Sélectionne ta langue préférée
+3. L'application se recharge automatiquement
+
+**Langues disponibles :**
+- 🇫🇷 Français (défaut)
+- 🇬🇧 English
+- 🇪🇸 Español
+- 🇩🇪 Deutsch
+- 🇮🇹 Italiano
+- 🇧🇷 Português (BR)
+- 🇯🇵 日本語
+
+**Note :** Seules les métadonnées TMDB sont traduites. Les interfaces des lecteurs vidéo (iframes) restent en anglais.
+
 ## 🌐 Déploiement Vercel
 
 1. Pousser le code sur GitHub

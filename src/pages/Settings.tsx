@@ -1,8 +1,8 @@
 import { GlassCard } from '../components/ui/GlassCard';
 import { NeonButton } from '../components/ui/NeonButton';
-import { getTmdbApiKey, setTmdbApiKey, tmdbAPI } from '../lib/api';
+import { getTmdbApiKey, setTmdbApiKey, tmdbAPI, getUserLanguage, setUserLanguage } from '../lib/api';
 import { useState } from 'react';
-import { Key, RotateCcw, CheckCircle, XCircle, Loader, Lock, ShieldCheck } from 'lucide-react';
+import { Key, RotateCcw, CheckCircle, XCircle, Loader, Lock, ShieldCheck, Globe } from 'lucide-react';
 
 const SETTINGS_PASSWORD = 'ISMABEST';
 
@@ -148,6 +148,34 @@ export function SettingsPage() {
           <button onClick={handleSaveKey} disabled={!apiKey.trim()} className="flex-1 py-3 rounded-xl bg-white text-black font-bold text-sm hover:bg-white/90 transition-all">
             Enregistrer
           </button>
+        </div>
+      </GlassCard>
+
+      {/* Language Selector */}
+      <GlassCard className="p-5 space-y-4">
+        <div className="flex items-center gap-2 text-[var(--neon-violet)]">
+          <Globe size={18} /> <span className="font-medium text-white">Langue de l'interface</span>
+        </div>
+        <p className="text-[13px] text-white/40 leading-relaxed">
+          Change la langue des titres, résumés et genres. L'application devra recharger.
+        </p>
+        <div className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 relative">
+          <select
+            value={getUserLanguage()}
+            onChange={(e) => {
+              setUserLanguage(e.target.value);
+              window.location.reload();
+            }}
+            className="w-full bg-transparent text-[14px] text-white focus:outline-none appearance-none cursor-pointer"
+          >
+            <option value="fr-FR" className="bg-[#08080f] text-white">🇫🇷 Français</option>
+            <option value="en-US" className="bg-[#08080f] text-white">🇬🇧 English</option>
+            <option value="es-ES" className="bg-[#08080f] text-white">🇪🇸 Español</option>
+            <option value="de-DE" className="bg-[#08080f] text-white">🇩🇪 Deutsch</option>
+            <option value="it-IT" className="bg-[#08080f] text-white">🇮🇹 Italiano</option>
+            <option value="pt-BR" className="bg-[#08080f] text-white">🇧🇷 Português (BR)</option>
+            <option value="ja-JP" className="bg-[#08080f] text-white">🇯🇵 日本語</option>
+          </select>
         </div>
       </GlassCard>
 
