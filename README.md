@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# 🌌 ISVERSE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web progressive (PWA) de streaming mobile-first, design glassmorphism/néon, catalogue TMDB et lecture multi-sources.
 
-Currently, two official plugins are available:
+## 📦 Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 18** + Vite + TypeScript
+- **Tailwind CSS** + Glassmorphism CSS custom
+- **Zustand** (state management) + React Router v7
+- **VitePWA** + Workbox (cache offline)
+- **TMDB API** (catalogue films & séries)
+- **Déploiement** : Vercel
 
-## React Compiler
+## 🚀 Installation Locale
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# 1. Cloner le repo
+git clone https://github.com/Ismael15120/isverse.git
+cd isverse
 
-## Expanding the ESLint configuration
+# 2. Installer les dépendances
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 3. Créer le fichier de configuration
+# Créer .env.local à la racine et y ajouter :
+VITE_TMDB_API_KEY=ta_cle_api_tmdb_ici
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 4. Lancer l'app en local
+npm run dev
+# → Ouvre http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> **Obtenir une clé TMDB** : Créé un compte sur [themoviedb.org](https://www.themoviedb.org) → Paramètres → API → Créer une clé v3.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🌐 Déploiement Vercel
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Pousser le code sur GitHub
+2. Aller sur [vercel.com](https://vercel.com) → "Add New Project"
+3. Importer le dépôt `isverse`
+4. Ajouter la variable d'environnement `VITE_TMDB_API_KEY` dans les réglages
+5. Cliquer sur **Deploy** (~2 min)
+
+## 🔐 Sécurité
+
+- La clé API TMDB est injectée au build via `import.meta.env`. Ne jamais la commiter.
+- Le fichier `.env.local` est ignoré par `.gitignore`.
+- La page `/settings` est protégée par un mot de passe local.
+
+## ⚠️ Limites Connues
+
+| Limite | Détail |
+|--------|--------|
+| Sources vidéo | Proviennent de services tiers (VidSrc, 2Embed). Disponibilité variable, géo-restrictions possibles. |
+| TMDB API | Limite ~500 req/jour sur plan gratuit. Usage personnel recommandé. |
+| PWA Cache | Cache les assets statiques et images TMDB. Ne cache **pas** les flux vidéo. |
+| localStorage | ~5-10 Mo. Watchlist et historique de lecture locaux uniquement. |
+| Plein écran | Certaines sources tierces bloquent le fullscreen en raison de leur propre CSP. Changer de source si problème. |
+
+## ⚖️ Mention Légale
+
+Ce projet est fourni à des fins **éducatives et d'usage personnel**. Aucun contenu protégé n'est hébergé sur ce projet. L'utilisateur est seul responsable du respect des lois locales sur le droit d'auteur et de l'usage des flux vidéo tiers.
+
+## 📄 Licence
+
+GPL-3.0 — Voir le fichier `LICENSE`.
