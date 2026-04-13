@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet, useLocation, Navigate } fr
 import { Suspense, lazy, useState, useCallback } from 'react';
 import { BottomNav } from './components/layout/BottomNav';
 import { SplashScreen } from './components/ui/SplashScreen';
+import { ErrorPage } from './components/ui/ErrorPage';
 import { Loader } from 'lucide-react';
 
 // Lazy loading pour améliorer le temps de démarrage initial
@@ -41,6 +42,7 @@ function Layout() {
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/search', element: <SearchResults /> },
