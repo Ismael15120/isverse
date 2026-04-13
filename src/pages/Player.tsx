@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { VideoPlayer } from '../components/player/VideoPlayer';
 import { useVideoSource } from '../hooks/useVideoSource';
 import { useStore } from '../store/useStore';
-import { ChevronLeft, ChevronRight, Tv, Film } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Tv, Film, Home } from 'lucide-react';
 
 export function PlayerPage() {
   const { id, type } = useParams<{ id: string; type: 'movie' | 'tv' }>();
@@ -107,8 +107,6 @@ export function PlayerPage() {
     if (episode > 1) {
       setSearchParams({ season: String(season), episode: String(episode - 1) });
     } else if (season > 1) {
-      // Go to previous season's last episode (estimate or fetch)
-      // For now, simpler: jump to S-1, E1 or just stay
       setSearchParams({ season: String(season - 1), episode: '1' });
     }
   };
@@ -118,7 +116,6 @@ export function PlayerPage() {
     if (episode < maxEpisodes) {
       setSearchParams({ season: String(season), episode: String(episode + 1) });
     } else {
-      // Try next season
       const maxSeasons = seriesInfo?.number_of_seasons || 1;
       if (season < maxSeasons) {
         setSearchParams({ season: String(season + 1), episode: '1' });
@@ -139,13 +136,24 @@ export function PlayerPage() {
     <div className="min-h-screen pb-20 animate-fade-in" style={{ background: '#08080f' }}>
       {/* ── Header ── */}
       <div className="flex items-center gap-3 px-5 py-5">
-        <button
-          onClick={(e) => { e.stopPropagation(); navigate(`/detail/${id}/${type}`); }}
-          className="p-2.5 rounded-xl transition-all active:scale-90 flex-shrink-0"
-          style={{ background: 'var(--glass-2)', border: '1px solid var(--glass-border)' }}
-        >
-          <ChevronLeft size={20} className="text-white" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); navigate(`/detail/${id}/${type}`); }}
+            className="p-2.5 rounded-xl transition-all active:scale-90 flex-shrink-0"
+            style={{ background: 'var(--glass-2)', border: '1px solid var(--glass-border)' }}
+            title="Retour"
+          >
+            <ChevronLeft size={20} className="text-white" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); navigate('/'); }}
+            className="p-2.5 rounded-xl transition-all active:scale-90 flex-shrink-0"
+            style={{ background: 'var(--glass-2)', border: '1px solid var(--glass-border)' }}
+            title="Accueil"
+          >
+            <Home size={20} className="text-white" />
+          </button>
+        </div>
 
         <div className="flex flex-col min-w-0 flex-1">
           <h1 className="text-[16px] font-bold text-white truncate leading-tight">
