@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { tmdbAPI, TMDB_IMG_BASE } from '../lib/api';
 import { useTMDB } from '../hooks/useTMDB';
-import { GlassCard, NeonButton, OnboardingModal } from '../components';
+import { NeonButton, OnboardingModal } from '../components';
 import { ChevronLeft, Play, Plus, Star, Calendar, Clock, Layers } from 'lucide-react';
 import { useStore } from '../store/useStore';
 

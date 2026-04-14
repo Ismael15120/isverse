@@ -9,6 +9,7 @@ interface MediaCardProps {
   media_type?: 'movie' | 'tv' | 'person';
   vote_average?: number;
   onClick: () => void;
+  isAnimeSama?: boolean;
 }
 
 export function MediaCard({
@@ -18,6 +19,7 @@ export function MediaCard({
   media_type,
   vote_average,
   onClick,
+  isAnimeSama,
 }: MediaCardProps) {
   const displayTitle = title || name || 'Sans titre';
   const imageUrl = poster_path
@@ -77,6 +79,16 @@ export function MediaCard({
             style={{ background: 'var(--accent-dim)', color: 'var(--accent-light)' }}
           >
             SÉRIE
+          </div>
+        )}
+
+        {/* Anime-Sama Badge */}
+        {isAnimeSama && (
+          <div
+            className="absolute top-2 left-2 badge"
+            style={{ background: 'var(--accent-gold)', color: 'black', fontWeight: 800, fontSize: '8px' }}
+          >
+            ANIME-SAMA
           </div>
         )}
       </div>

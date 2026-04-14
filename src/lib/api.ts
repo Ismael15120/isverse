@@ -1,7 +1,5 @@
 // ═══════════════════════════════════════════
-//  ISVERSE — Client API TMDB
-//  Supporte clé v3 (courte) et token v4 (Bearer)
-// ═══════════════════════════════════════════
+import { animeSamaCinema } from '../data/animeSama';
 
 const TMDB_BASE = 'https://api.themoviedb.org/3';
 export const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -78,9 +76,27 @@ export const tmdbAPI = {
     sort_by: 'popularity.desc' 
   }),
   getAction:       ()               => fetchTMDB('/discover/movie', { with_genres: '28' }),
-  search:         (query: string)  => fetchTMDB('/search/multi', { query }),
+  search: (query: string) => {
+    const localResults = animeSamaCinema.filter(item => 
+      item.title.toLowerCase().includes(query.toLowerCase()) ||
+      item.overview.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    return fetchTMDB(`/search/multi?query=${encodeURIComponent(query)}`).then(data => {
+      // Merge local results with TMDB results, avoiding duplicates
+      const tmdbResults = data.results || [];
+      const localIds = new Set(localResults.map(i => i.id));
+      const filteredTMDB = tmdbResults.filter((i: any) => !localIds.has(i.id));
+      
+      return {
+        ...data,
+        results: [...localResults, ...filteredTMDB]
+      };
+    });
+  },
   getDetails:     (id: string | number, type: 'movie' | 'tv') => fetchTMDB(`/${type}/${id}`),
   getSeason:      (tvId: string | number, seasonNum: number)  => fetchTMDB(`/tv/${tvId}/season/${seasonNum}`),
   getExternalIds: (id: string | number, type: 'movie' | 'tv') => fetchTMDB(`/${type}/${id}/external_ids`),
+  getAnimeSamaCinema: async () => ({ results: animeSamaCinema }),
   testConnection: ()               => fetchTMDB('/configuration'),
 };

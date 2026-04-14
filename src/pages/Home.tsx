@@ -10,7 +10,7 @@ export function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   
   // Data for Hero and Sections
-  const { data: trending, loading: trendingLoading, error, hasKey } = useTMDB(tmdbAPI.getTrending);
+  const { data: trending, hasKey } = useTMDB(tmdbAPI.getTrending);
 
   // Pick a random featured item for the Hero section from trending results
   const featuredItem = useMemo(() => {
@@ -118,7 +118,14 @@ export function Home() {
       {/* ── Content Sections ── */}
       <div className="flex flex-col gap-12">
         
-        {/* Tendances (handled specially to use already fetched data if needed, or just use MediaSection) */}
+        {/* Anime-Sama Cinema */}
+        <MediaSection 
+          title="Cinéma Anime-Sama" 
+          icon={Zap} 
+          fetcher={tmdbAPI.getAnimeSamaCinema} 
+        />
+
+        {/* Tendances de la semaine */}
         <MediaSection 
           title="Tendances de la semaine" 
           icon={TrendingUp} 

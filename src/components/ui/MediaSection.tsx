@@ -44,7 +44,7 @@ export function MediaSection({ title, icon: Icon, fetcher }: MediaSectionProps) 
                 <MediaCard
                   key={item.id}
                   {...item}
-                  onClick={() => navigate(`/detail/${item.id}/${item.media_type || (title.includes('Série') || title.includes('Anime') ? 'tv' : 'movie')}`)}
+                  onClick={() => navigate(`/detail/${item.id}/${item.media_type || (title.includes('Série') ? 'tv' : 'movie')}`)}
                 />
               ) : null
             )}
